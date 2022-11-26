@@ -17,3 +17,16 @@ const quizzesSlice = createSlice({
     }
   }
 });
+
+// action creater thunk to add quiz, and then add the quizId to the corresponding topic id Array
+export const addQuizTopic = (quiz) => {
+  const { quizId, topicId } = quiz;
+  return (dispatch) => {
+    dispatch(quizzesSlice.actions.addQuiz(quiz));
+    dispatch(addTopicQuiz({ quizId: quizId, topicId: topicId }));
+  };
+};
+
+export const selectQuizzes = (state) => state.quizzes.quizzes;
+export const { addQuiz } = quizzesSlice.actions;
+export default quizzesSlice.reducer;
